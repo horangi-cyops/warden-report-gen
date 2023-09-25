@@ -8,6 +8,12 @@ foo@bar ~ $ python3 reportparse.py --excel_file <filename>.xlsx --raw <raw check
 
 Any rules that are determined to not be issues, should be set as "Not an Issue" (case insensitive)
 
+The grouped checks sheet should include the following headers:
+* Issue Title
+* Affected Module: This field corresponds to the Rule Title in the raw sheet
+* Severity
+* Score
+
 ## TBD
 * Output excel formatting
 * Cleanup to remove unused code
