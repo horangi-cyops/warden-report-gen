@@ -19,7 +19,7 @@ def alt_gen_report_df(raw_df: pd.DataFrame, group_df: pd.DataFrame) -> pd.DataFr
     """
 
     # Keeping only the columns we need
-    raw_df = raw_df[["Rule Title", "Resource", "Notes", "Recommendation", "References"]]
+    raw_df = raw_df[["Rule Title", "Resource", "Notes", "Recommendation", "References", "Account GID"]]
     group_df = group_df[["Issue Title", "Severity", "Score", "Affected Module"]]
 
     # Removing rows in group_df that have "not an issue" in title
@@ -30,11 +30,11 @@ def alt_gen_report_df(raw_df: pd.DataFrame, group_df: pd.DataFrame) -> pd.DataFr
     merged_df = raw_df.merge(group_df, how='inner', right_on='Affected Module', left_on='Rule Title')
 
     # Renaming columns to keep them consistent and also removing duplicates
-    merged_df = merged_df.rename(columns={'Resource':'Affected Resource', 'Severity': 'Rating'})
+    merged_df = merged_df.rename(columns={'Resource':'Affected Resource', 'Severity': 'Rating', 'Account GID':'Affected Account'})
     
     print(merged_df.columns)
     # finally, keeping only the columns needed
-    merged_df = merged_df[['Issue Title', 'Rating', 'Score', 'Affected Module', 'Affected Resource', 'Notes', 'Recommendation', 'References']]
+    merged_df = merged_df[['Issue Title', 'Rating', 'Score', 'Affected Module','Affected Account', 'Affected Resource', 'Notes', 'Recommendation', 'References']]
     merged_df = merged_df.drop_duplicates()
 
     return merged_df
